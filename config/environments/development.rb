@@ -52,8 +52,8 @@ Rails.application.configure do
   address: 'smtp.mailtrap.io',
   port: 587,
   domain: 'localhost',
-  user_name: '40a4279e566ad4',
-  password: '18b4324291b8c0',
+  user_name: '5c7d57ee5b7095',
+  password: 'be6dc4ab713da4',
   authentication: :plain
   }
   # Raise exceptions for disallowed deprecations.
