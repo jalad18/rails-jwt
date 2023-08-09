@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_083002) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_09_114209) do
+  create_table "properties", force: :cascade do |t|
+    t.string "city"
+    t.string "country"
+    t.integer "price"
+    t.integer "status"
+    t.integer "year"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_properties_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -20,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_083002) do
     t.datetime "updated_at", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.integer "role"
   end
 
+  add_foreign_key "properties", "users"
 end

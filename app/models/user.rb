@@ -5,6 +5,10 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :password,length: { minimum: 6 },if: -> { new_record? || !password.nil? }
 
+  enum role: { customer: 0, agent: 1 }
+  validates :role, inclusion: { in: roles.keys }
+  has_many :properties
+
   def generate_password_token!
     self.reset_password_token = generate_token
     self.reset_password_sent_at = Time.now.utc

@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get '/*a', to: 'application#not_found'
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'
-
+  resources :properties  
 end

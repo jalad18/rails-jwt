@@ -23,6 +23,16 @@ class UsersController < ApplicationController
                status: :unprocessable_entity
       end
     end
+
+    def assigned_tasks
+      @user = User.find(params[:id])
+      @assigned_task = @user.assigned_tasks
+    end
+
+    def recieved_tasks
+      @user = User.find(params[:id])
+      @recieved_tasks = @user.recieved_tasks
+    end
   
     # PUT /users/{username}
     def update
@@ -36,6 +46,7 @@ class UsersController < ApplicationController
     def destroy
       @user.destroy
     end
+    
   
     private
   
@@ -47,7 +58,7 @@ class UsersController < ApplicationController
   
     def user_params
       params.permit(
-        :name, :username, :email, :password, :password_confirmation
+        :name, :username, :email, :password, :password_confirmation, :role
       )
     end
   end
