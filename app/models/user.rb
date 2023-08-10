@@ -8,6 +8,7 @@ class User < ApplicationRecord
   enum role: { user: 0, lawyer: 1 }
   has_one :lawyer_detail, dependent: :destroy
   has_many :news
+  
 
   def generate_password_token!
     self.reset_password_token = generate_token

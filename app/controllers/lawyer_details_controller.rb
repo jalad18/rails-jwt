@@ -26,15 +26,17 @@ class LawyerDetailsController < ApplicationController
   end
 
   def update
-    unless @lawyer_detail.update(set_params)
-      render json: { errors: @lawyer_detail.errors.full_messages }, status: :unprocessable_entity
+    if @lawyer_detail.update(set_params)
+      render json: @lawyer_detail, status: :ok
+    else
+      render json: { errors: @lawyer_detail.errors.full_messages },status: :unprocessable_entity
     end
   end
 
   private
 
   def set_params
-    params.require(:lawyer_detail).permit(:license_no, :practice_court_name, :practice_field_name, :experience, :city, :consultation_fees)
+    params.require(:lawyer_detail).permit(:license_no, :practice_court_name, :practice_field_name, :experience, :city, :consultation_fees,reviews_attributes: [:rating, :content])
   end
 
   def find_lawyer_detail

@@ -26,7 +26,9 @@ class NewsController < ApplicationController
   end
   
   def update
-    unless @news.update(set_params)
+    if @news.update(set_params)
+      render json: @news, status: :ok
+    else
       render json: { errors: @news.errors.full_messages },status: :unprocessable_entity
     end
   end

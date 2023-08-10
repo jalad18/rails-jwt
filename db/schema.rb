@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_09_084043) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_09_131821) do
   create_table "lawyer_details", force: :cascade do |t|
     t.string "license_no"
     t.integer "user_id", null: false
@@ -33,6 +33,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_084043) do
     t.index ["user_id"], name: "index_news_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "content"
+    t.integer "user_id", null: false
+    t.integer "lawyer_detail_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lawyer_detail_id"], name: "index_reviews_on_lawyer_detail_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -47,4 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_084043) do
 
   add_foreign_key "lawyer_details", "users"
   add_foreign_key "news", "users"
+  add_foreign_key "reviews", "lawyer_details"
+  add_foreign_key "reviews", "users"
 end
