@@ -5,12 +5,12 @@ class UsersController < ApplicationController
     # GET /users
     def index
       @users = User.all
-      render json: @users, status: :ok
+      render json: @users, status: :ok, Serializer: UserSerializer
     end
   
     # GET /users/{username}
     def show
-      render json: @user, status: :ok
+      render json: @user, status: :ok, Serializer: UserSerializer
     end
   
     # POST /users
@@ -22,16 +22,6 @@ class UsersController < ApplicationController
         render json: { errors: @user.errors.full_messages },
                status: :unprocessable_entity
       end
-    end
-
-    def assigned_tasks
-      @user = User.find(params[:id])
-      @assigned_task = @user.assigned_tasks
-    end
-
-    def recieved_tasks
-      @user = User.find(params[:id])
-      @recieved_tasks = @user.recieved_tasks
     end
   
     # PUT /users/{username}

@@ -8,7 +8,7 @@ class PropertiesController < ApplicationController
     end
   
     def show
-      render json: @property, status: :ok
+      render json: @property, status: :ok, data: {PropertySerializer.new(@property)}
     end
   
     def create
@@ -39,6 +39,7 @@ class PropertiesController < ApplicationController
     def get_property
         @user = User.find(params[:user_id])
         @properties = @user.properties
+        render json: @properties, status: :ok
     end
 
     private
