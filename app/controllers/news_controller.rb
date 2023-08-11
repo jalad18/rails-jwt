@@ -8,7 +8,7 @@ class NewsController < ApplicationController
   end
   
   def show
-    render json: @news, status: :ok
+    render json: {data: NewsSerializer.new(@news)}
   end
   
   def edit

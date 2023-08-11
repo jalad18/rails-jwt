@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
   before_action :authorize_request, except: :create
-  before_action :find_user, except: %i[create index]
-   
+  before_action :find_user, except: %i[create index :show]
+
   def index
     @users = User.all
     render json: @users, status: :ok
   end
   
   def show
-    render json: @user, status: :ok
+    render json: {data: UserSerializer.new(@user)}
   end
-  
+
   def create
     @user = User.new(user_params)
     if @user.save

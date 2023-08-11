@@ -7,6 +7,8 @@ ruby "3.0.0"
 gem 'jwt'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
+gem 'active_model_serializers', '~> 0.10.2'
+gem 'byebug'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.6"
