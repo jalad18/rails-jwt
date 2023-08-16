@@ -31,6 +31,17 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
   end
+
+  def login
+    user = User.find_by(email: params[:email])
+
+    if user&.authenticate(params[:password])
+      token = encode_token(user_id: user.id)
+      render json: { token: token }, status: :ok
+    else
+      render json: { error: "Invalid credentials" }, status: :unauthorized
+    end
+  end
   
   private
   
@@ -44,3 +55,4 @@ class UsersController < ApplicationController
     params.permit(:name, :username, :email, :password, :password_confirmation, :role)
   end
 end
+

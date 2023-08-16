@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   before_action :authorize_request 
-  before_action :find_news, only: [:show, :edit, :update]
+  before_action :find_news, only: [:show, :edit, :update, :destroy]
   
   def index
     @news = News.all
@@ -34,7 +34,12 @@ class NewsController < ApplicationController
   end
 
   def destroy
-    @news.destroy
+    if @news
+      @news.destroy
+      head :no_content
+    else
+      render json: { errors: 'News not found' }, status: :not_found
+    end
   end
   
   private

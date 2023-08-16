@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :cases
   get '/*a', to: 'application#not_found'
 
+  post 'login', to: 'users#login'
+
+
 end
