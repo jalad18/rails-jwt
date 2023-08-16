@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+<<<<<<< HEAD
   before_action :authorize_request, except: :create
   before_action :find_user, except: %i[create index :show]
 
@@ -25,6 +26,20 @@ class UsersController < ApplicationController
       render json: @user, status: :ok
     else
       render json: { errors: @user.errors.full_messages },status: :unprocessable_entity
+=======
+    before_action :authorize_request, except: :create
+    before_action :find_user, except: %i[create index]
+  
+    # GET /users
+    def index
+      @users = User.all
+      render json: @users, status: :ok, Serializer: UserSerializer
+    end
+  
+    # GET /users/{username}
+    def show
+      render json: @user, status: :ok, Serializer: UserSerializer
+>>>>>>> origin/main
     end
   end
   
@@ -45,6 +60,7 @@ class UsersController < ApplicationController
   
   private
   
+<<<<<<< HEAD
   def find_user
     @user = User.find_by_username!(params[:_username])
     rescue ActiveRecord::RecordNotFound
@@ -56,3 +72,25 @@ class UsersController < ApplicationController
   end
 end
 
+=======
+    # DELETE /users/{username}
+    def destroy
+      @user.destroy
+    end
+    
+  
+    private
+  
+    def find_user
+      @user = User.find_by_username!(params[:_username])
+      rescue ActiveRecord::RecordNotFound
+        render json: { errors: 'User not found' }, status: :not_found
+    end
+  
+    def user_params
+      params.permit(
+        :name, :username, :email, :password, :password_confirmation, :role
+      )
+    end
+  end
+>>>>>>> origin/main

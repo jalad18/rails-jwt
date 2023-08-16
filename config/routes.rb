@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post '/auth/login', to: 'authentication#login'
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'
+<<<<<<< HEAD
   resources :lawyer_details, except: [:destroy]
   resources :news
   resources :cases
@@ -11,5 +12,12 @@ Rails.application.routes.draw do
 
   post 'login', to: 'users#login'
 
+=======
+  resources :properties do
+    resources :reviews
+  end
+
+  get 'users/:user_id/properties', to: 'properties#get_property'
+>>>>>>> origin/main
 
 end
